@@ -6,32 +6,26 @@
         body { margin: 0; overflow: hidden; }
         #viewer { width: 100vw; height: 100vh; }
     </style>
-    <!-- Importe o novo pacote ESM -->
-    <script type="module">
-        import { Viewer } from 'https://cdn.jsdelivr.net/npm/web-ifc-viewer@2.0.0/dist/web-ifc-viewer.esm.min.js';
-        
-        // Configuração do viewer
-        const container = document.getElementById('viewer');
-        const viewer = new Viewer({
-            container,
-            backgroundColor: '#f5f5f5'
-        });
-
-        // Carregamento do modelo
-        viewer.IFC.loader.ifcManager.applyWebIfcConfig({
-            COORDINATE_TO_ORIGIN: true,
-            USE_FAST_BOOLS: false
-        });
-
-        viewer.IFC.loader.load(
-            'modelo.ifc',
-            (model) => console.log('Modelo carregado!', model),
-            (progress) => console.log('Progresso:', progress),
-            (error) => console.error('Erro:', error)
-        );
-    </script>
+    <!-- Carrega a biblioteca primeiro -->
+    <script src="https://cdn.jsdelivr.net/npm/web-ifc-viewer@1.0.38/dist/web-ifc-viewer.umd.min.js"></script>
 </head>
 <body>
     <div id="viewer"></div>
+
+    <script>
+        // Agora deve funcionar com o namespace correto
+        const viewer = new ifcViewer.Viewer({
+            container: document.getElementById('viewer'),
+            backgroundColor: '#f0f0f0'
+        });
+
+        // Carrega o modelo IFC
+        viewer.IFC.loader.load(
+            'modelo.ifc',
+            () => console.log('Modelo carregado com sucesso!'),
+            (progress) => console.log('Progresso:', progress),
+            (error) => console.error('Erro ao carregar:', error)
+        );
+    </script>
 </body>
 </html>
