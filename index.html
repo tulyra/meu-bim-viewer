@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meu Visualizador BIM</title>
+    <!-- CSS para preencher a tela -->
+    <style>
+        body { margin: 0; overflow: hidden; }
+        #viewer { width: 100vw; height: 100vh; }
+    </style>
+</head>
+<body>
+    <!-- Container onde o modelo será renderizado -->
+    <div id="viewer"></div>
+
+    <!-- Importa a biblioteca IFC.js -->
+    <script src="https://cdn.jsdelivr.net/npm/web-ifc-viewer@1.0.38/dist/web-ifc-viewer.js"></script>
+    
+    <!-- Script principal -->
+    <script>
+        // Inicializa o visualizador
+        const viewer = new WebIFCViewer.Viewer({
+            container: document.getElementById("viewer"),
+        });
+
+        // Carrega o modelo IFC
+        viewer.IFC.loader.load("modelo.ifc");
+    </script>
+</body>
+</html>
